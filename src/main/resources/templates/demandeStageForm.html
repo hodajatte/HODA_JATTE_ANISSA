@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+  <meta charset="UTF-8">
+  <title>Demande de Stage</title>
+</head>
+<body>
+
+<h2>Demande de Stage</h2>
+
+<form th:action="@{/demande-stage}" method="post">
+  <input type="hidden" th:name="stageId" th:value="${stage.id}" />
+  <label for="nom">Nom :</label>
+  <input type="text" id="nom" name="nom" required />
+  <!-- Autres champs du formulaire -->
+  <button type="button" onclick="afficherConfirmation()">Valider la Demande</button>
+</form>
+
+<div th:if="${message}">
+  <p th:text="${message}" style="color: green;"></p>
+</div>
+
+<script>
+  function afficherConfirmation() {
+    if (confirm("Êtes-vous sûr de vouloir valider cette demande de stage ?")) {
+      document.querySelector("form").submit();
+    }
+  }
+</script>
+
+</body>
+</html>

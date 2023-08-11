@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Demandes de Stage</title>
+</head>
+<body>
+
+<h2>Liste des Demandes de Stage</h2>
+
+<table>
+    <tr th:each="demande : ${demandes}">
+        <td><a th:href="@{/admin/details-demande/{id}(id=${demande.id})}">Détails</a></td>
+    </tr>
+</table>
+
+</body>
+</html>

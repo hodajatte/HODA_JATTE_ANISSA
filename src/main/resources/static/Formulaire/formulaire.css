@@ -1,0 +1,92 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Apply some basic styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Style the form */
+.signup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    flex: 1;
+    margin-right: 15px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-radio {
+    flex: 1;
+}
+
+.form-flex {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.form-text {
+    margin-top: 15px;
+}
+
+.add-info-link {
+    text-decoration: none;
+    color: #428bca;
+    cursor: pointer;
+}
+
+.add_info {
+    display: none;
+    margin-top: 10px;
+}
+
+.select-list select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-submit {
+    background-color: #428bca;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style for error messages (optional) */
+.error-message {
+    color: #d9534f;
+    margin-top: 5px;
+}

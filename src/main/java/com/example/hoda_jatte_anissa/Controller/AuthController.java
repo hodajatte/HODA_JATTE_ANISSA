@@ -35,11 +35,16 @@ public class AuthController {
     public String Admin(){
         return "Index-Admin";
     }*/
-    @GetMapping("/DemandeStage")
+   @GetMapping("/DemandeStage")
     public String demandestage(){
         return "DemandeStage";
     }
 
+
+    /*@GetMapping("/form")
+    public String demandestage(){
+        return "form";
+    }*/
     @RequestMapping("/login")
     public String loginForm() {
         return "login";

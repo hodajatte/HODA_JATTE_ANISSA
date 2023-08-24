@@ -82,6 +82,9 @@ public class DemandeController {
             }
 
             demandeService.saveDemande(demande);
+            // Appeler la fonction JavaScript pour augmenter le compteur de notifications
+            model.addAttribute("notification", true); // Vous pouvez ajouter cet attribut pour activer la notification côté vue
+
             /*isDemandeEnregistree = true;// Marquer la demande comme enregistrée*/
 
             return "redirect:/demandeStage";

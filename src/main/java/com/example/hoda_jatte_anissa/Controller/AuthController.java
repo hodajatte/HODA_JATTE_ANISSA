@@ -21,10 +21,10 @@ public class AuthController {
         this.userService = userService;
     }
 
-   /* @GetMapping("/index")
-    public String home(){
-        return "index";
-    }*/
+   @GetMapping("/confirmation")
+    public String conf(){
+        return "confirmation";
+    }
 
    /* @GetMapping("/index1")
     public String Index1(){
@@ -35,10 +35,24 @@ public class AuthController {
     public String Admin(){
         return "Index-Admin";
     }*/
-   @GetMapping("/DemandeStage")
+   /*@GetMapping("/DemandeStage")
     public String demandestage(){
         return "DemandeStage";
-    }
+    }*/
+    /*@GetMapping("/DemandeStage")
+    public String demandestage(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userRole = authentication.getAuthorities().iterator().next().getAuthority();
+        String username = authentication.getName();
+
+        model.addAttribute("userRole", userRole);
+        model.addAttribute("username", username);
+
+        return "DemandeStage";
+    }*/
+
+
+
 
 
     /*@GetMapping("/form")

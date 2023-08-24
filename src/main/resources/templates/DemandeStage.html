@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<!-- ... -->
+
 <head>
    <!-- basic -->
    <meta charset="utf-8">
@@ -38,27 +40,23 @@
 
 
 
-
-   <!--[if lt IE 9]>
-   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-   <![endif]-->
-
-
-
    <link rel="stylesheet" type="text/css" href="Formulaire/formulaire.css">
    <script src="Formulaire/formulaireJs.js"></script>
 
 
 
-   <!-- ... (other meta tags and stylesheets) ... -->
+      <-- ... (other meta tags and stylesheets) ... -->
    <!-- jQuery -->
+   <!--
    <script src="js/jquery.min.js"></script>
    <script src="js/popper.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
-   <!-- Datepicker CSS -->
+   <-- Datepicker CSS -->
+   <!--
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css">
-   <!-- rest of your stylesheets ... -->
+   rest of your stylesheets ... -->
+
+
 
 
 
@@ -80,7 +78,8 @@
                <div class="user_profle_side">
                   <div class="user_img"><img class="img-responsive" src="images/layout_img/user_img.jpg" alt="#" /></div>
                   <div class="user_info">
-                     <h6>John David</h6>
+                     <h6 th:text="${userRole}"></h6>
+                     <h6 th:text="${username}"></h6>
                      <p><span class="online_animation"></span> Online</p>
                   </div>
                </div>
@@ -100,7 +99,7 @@
                      </li>
                   </ul>
                </li>
-               <li><a href="DemandeStage.html"><i class="fa fa-clock-o orange_color"></i> <span>Demander un Stage</span></a></li>
+               <li><a href="DemandeStage.html"><i class="fa fa-clock-o orange_color"></i> <span>Demander un stage</span></a></li>
                <li>
                   <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>Elements</span></a>
                   <ul class="collapse list-unstyled" id="element">
@@ -159,18 +158,20 @@
                   <div class="right_topbar">
                      <div class="icon_info">
                         <ul>
-                           <li><a href="#"><i class="fa fa-bell-o"></i><span class="badge">2</span></a></li>
+                           <li ><a href="#"><i class="fa fa-bell-o"></i><span class="badge">2</span></a></li>
                            <li><a href="#"><i class="fa fa-question-circle"></i></a></li>
                            <li><a href="#"><i class="fa fa-envelope-o"></i><span class="badge">3</span></a></li>
                         </ul>
                         <ul class="user_profile_dd">
                            <li>
-                              <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="images/layout_img/user_img.jpg" alt="#" /><span class="name_user">John David</span></a>
+                              <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="images/layout_img/user_img.jpg" alt="#" /><span class="name_user"  th:text="${username}"></span></a>
                               <div class="dropdown-menu">
                                  <a class="dropdown-item" href="profile.html">My Profile</a>
-                                 <a class="dropdown-item" href="settings.html">Settings</a>
-                                 <a class="dropdown-item" href="help.html">Help</a>
-                                 <a class="dropdown-item" href="#"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
+                                 <form method="post" th:action="@{/logout}" >
+                                    <button type="submit" class="logout-button">
+                                       <span>Log Out</span> <i class="fa fa-sign-out"></i>
+                                    </button>
+                                 </form>
                               </div>
                            </li>
                         </ul>
@@ -186,47 +187,50 @@
                <div class="row column_title">
                   <div class="col-md-12">
                      <div class="page_title">
-                        <h2>Anissa</h2>
+                        <img src="images/icon_form.png" class="iconF" alt="">
+                        <h2>Inscrire Pour un Stage</h2>
                      </div>
                   </div>
                </div>
+
+
 
                <div class="main">
                   <section class="signup">
                      <!-- <img src="images/signup-bg.jpg" alt=""> -->
                      <div class="container">
                         <div class="signup-content">
-                           <form method="POST" id="signup-form" class="signup-form">
+                           <form  th:action="@{/demandeStage}"   th:object="${demande}" method="post" class="signup-form" enctype="multipart/form-data">
                               <div class="form-row">
                                  <div class="form-group">
-                                    <label for="first_name">First name</label>
-                                    <input type="text" class="form-input" name="first_name" id="first_name" />
+                                    <label for="nom">Nom</label>
+                                    <input type="text" class="form-input" id="nom" placeholder="Nom"  th:field="${demande.nom}"  required/>
                                  </div>
                                  <div class="form-group">
-                                    <label for="last_name">Last name</label>
-                                    <input type="text" class="form-input" name="last_name" id="last_name" />
+                                    <label for="prenom">Prenom</label>
+                                    <input type="text" class="form-input" id="prenom"  placeholder="Prénom"  th:field="${demande.prenom}"  required/>
                                  </div>
                               </div>
                               <div class="form-row">
                                  <div class="form-group form-icon">
-                                    <label for="birth_date">Birth date</label>
+                                    <label for="date_naissance">Date Naissance</label>
                                     <div class="input-group date">
-                                       <input type="text" class="form-control" name="birth_date" id="birth_date" placeholder="MM-DD-YYYY">
+                                       <input type="date" class="form-control" name="date_naissance" id="date_naissance" pattern="yyyy-MM-dd"  th:field="${demande.date_naissance}" required >
                                        <div class="input-group-append">
-                                          <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+
                                        </div>
                                     </div>
                                  </div>
                                  <div class="form-group form-radio">
-                                    <label>Gender</label>
+                                    <label>Genre</label>
                                     <div class="form-flex">
                                        <label>
-                                          <input type="radio" name="gender" value="male" checked="checked" />
-                                          Male
+                                          <input type="radio" name="genre" value="masculin" checked="checked"  placeholder="Genre"   th:field="${demande.genre}" required/>
+                                          Masculin
                                        </label>
                                        <label>
-                                          <input type="radio" name="gender" value="female" />
-                                          Female
+                                          <input type="radio" name="genre" value="feminin"  placeholder="Genre"  th:field="${demande.genre}" required/>
+                                          Feminin
                                        </label>
                                     </div>
                                  </div>
@@ -234,47 +238,80 @@
                               </div>
                               <div class="form-row">
                                  <div class="form-group">
-                                    <label for="Phone_number">Phone</label>
-                                    <input type="text" class="form-input" name="Phone_number" id="Phone_number" />
+                                    <label for="tel">Téléphone</label>
+                                    <input type="text" class="form-input" name="tel" id="tel"  placeholder="Tel" th:field="${demande.tel}" required/>
                                  </div>
                                  <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-input" name="email" id="email"/>
+                                    <input type="email" class="form-input" name="email" id="email"   placeholder="Email"  th:field="${demande.email}" required/>
                                  </div>
+                                </div>
+                                 <div class="form-row">
+                                    <div class="form-group">
+                                       <label for="filiere">Filière</label>
+                                       <input type="text" class="form-input" name="filiere" id="filiere"    placeholder="Filiere" th:field="${demande.filiere}" required/>
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="etablissement">Etablissement</label>
+                                       <input type="text" class="form-input" name="etablissement" id="etablissement"   placeholder="Etablissement"  th:field="${demande.etablissement}" required />
+                                    </div>
+                                 </div>
+
+                              <div class="form-row">
                                  <div class="form-group">
-                                    <label for="type">Type Internship </label>
+                                    <label for="type">Type Stage </label>
                                     <div class="select-list">
-                                       <select name="type" id="type" required>
+                                       <select name="type" id="type"   placeholder="Type"  th:field="${demande.type}" required>
                                           <option value="PFA">PFA</option>
                                           <option value="PFE">PFE</option>
                                        </select>
                                     </div>
                                  </div>
-                                 <div class="form-row">
-                                    <div class="form-row">
-                                       <div class="form-group">
-                                          <label for="start date">Start Date</label>
-                                          <input type="text" class="form-input" name="start date" id="start date" />
-                                       </div>
-                                       <div class="form-row">
-                                          <div class="form-group">
-                                             <label for="end date">End Date</label>
-                                             <input type="text" class="form-input" name="end date" id="end date" />
-                                          </div>
-                              </div>
-                                 <div class="form-row">
-                                    <div class="form-group">
-                                       <label for="duration">Duration</label>
-                                       <input type="text" class="form-input" name="duration" id="duration" />
-                                    </div>
+                                 <div class="form-group">
+                                    <label for="niveau_scolaire">Niveau Scolaire</label>
+                                    <input type="text" class="form-input" name="niveau_scolaire" id="niveau_scolaire"    placeholder="Niveau Scolaire"  th:field="${demande.niveau_scolaire}" required/>
                                  </div>
                               </div>
-                              <div class="form-group">
-                                 <input type="submit" name="submit" id="submit" class="form-submit" value="Submit"/>
-                              </div>
+                                    <div class="form-row">
+                                       <div class="form-group form-icon">
+                                          <label for="dateDebut">Date Début</label>
+                                          <div class="input-group date">
+                                             <input type="date" class="form-control" name="dateDebut" id="dateDebut" pattern="yyyy-MM-dd"  th:field="${demande.dateDebut}" required>
+                                             <div class="input-group-append">
+
+                                             </div>
+                                          </div>
+                                       </div>
+                                          <div class="form-group form-icon">
+                                             <label for="dateFin">Date Fin</label>
+                                             <div class="input-group date">
+                                                <input type="date" class="form-control" name="dateFin" id="dateFin"  pattern="yyyy-MM-dd" th:field="${demande.dateFin}" required >
+                                                <div class="input-group-append">
+
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="form-row">
+                                       <div class="form-group-file">
+                                          <label for="cvFile">Importer CV:</label>
+                                          <input type="file" class="form-input-file" name="cvFile" id="cvFile" accept=".pdf,.doc,.docx" th:field="${demande.cvFile}" required >
+                                       </div>
+                                       <div class="form-group-file">
+                                          <label for="lettreMotivationFile">Lettre Motivation</label>
+                                          <input type="file" class="form-input-file" name="lettreMotivationFile" id="lettreMotivationFile" accept=".pdf,.doc,.docx"  th:field="${demande.lettreMotivationFile}" required>
+                                       </div>
+                                       </div>
+                                    <div class="form-group">
+                                       <input type="submit" name="submit" id="submit" class="form-submit" value="Submit"/>
+                                    </div>
+
+
+
                            </form>
                         </div>
-                     </div>
+
+               </div>
                   </section>
                </div>
 
@@ -396,7 +433,24 @@
 
 
 
-               <!-- row -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               <!--formulaire-- End>
+
+
+                                    <-- row -->
                <div class="row column1">
                   <div class="col-md-6 col-lg-4">
                      <div class="full white_shd margin_bottom_30">
@@ -450,17 +504,42 @@
 
 
 </div>
+
 <!-- ... (rest of your HTML content) ... -->
 <!-- Datepicker JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js"></script>
 <!-- rest of your scripts -->
+<!--
 <script>
    $(document).ready(function() {
-      $('#birth_date').datepicker({
-         format: 'mm-dd-yyyy', // Format de la date
+      $('#date_naissance').datepicker({
+         format: 'MM-DD-YYYY', // Format de la date
          autoclose: true
       });
    });
 </script>
+!-->
+<!--
+<script>
+   $(document).ready(function() {
+      $('#date_naissance').datepicker({
+         format: 'DD-MM-YYYY',
+         autoclose: true
+      });
+
+      $('#dateDebut').datepicker({
+         format: 'DD-MM-YYYY',
+         autoclose: true
+      });
+
+      $('#dateFin').datepicker({
+         format: 'DD-MM-YYYY',
+         autoclose: true
+      });
+   });
+</script>
+!-->
+
+
 </body>
 </html>

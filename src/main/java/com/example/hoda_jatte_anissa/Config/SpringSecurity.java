@@ -33,6 +33,7 @@ public class SpringSecurity {
                                 .requestMatchers("/Index-Admin").hasAnyAuthority("Admin")
                                 .requestMatchers("/Index-User").hasAnyAuthority("User")
                                 .requestMatchers("/fonts/**").permitAll()
+                                .requestMatchers("Formulaire/images/icon_form.png").permitAll()
                                 .requestMatchers("Form/fontsH/material-icon/cssHoda/material-design-iconic-font.min.css" ).permitAll()
                                 .requestMatchers("Form/vendorH/jquery-ui/jquery-ui.min.css" ).permitAll()
                                 .requestMatchers("Form/vendorH/jqueryH/jquery.min.js" ).permitAll()

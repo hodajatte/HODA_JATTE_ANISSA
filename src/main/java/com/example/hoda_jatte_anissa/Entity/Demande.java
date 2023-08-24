@@ -4,8 +4,12 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import java.time.LocalDate;
+
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,22 +19,29 @@ public class Demande {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String nom;
+    private String prenom;
+    private String tel;
+
+
     private LocalDate dateDebut;
     private LocalDate dateFin;
-    private int Durée;
 
-    private String CV;
-    private String Lettre_Motivation;
 
-    private boolean validee;
+    private  LocalDate date_naissance;
+    @Transient
+    private MultipartFile cvFile;
+    @Transient
+    private MultipartFile lettreMotivationFile;
 
-    private  String Etat;
-    private String filière;
-    private String Etablissement;
+    private String Etat;
+    private String email;
 
-    private String Niveau_Scolaire;
+    private String filiere;
+    private String etablissement;
 
-    @OneToOne
-    @JoinColumn(name ="stagiaire_id" )
-    private Stagiaire stagiaire;
+    private String niveau_scolaire;
+    private String genre;
+    private String type;
+
 }

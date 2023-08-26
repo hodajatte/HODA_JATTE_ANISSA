@@ -45,6 +45,7 @@
 
 
 
+
       <-- ... (other meta tags and stylesheets) ... -->
    <!-- jQuery -->
    <!--
@@ -158,8 +159,8 @@
                   <div class="right_topbar">
                      <div class="icon_info">
                         <ul>
-                           <li ><a href="#" id="notificationIcon"><i class="fa fa-bell-o"></i><span class="badge" id="notificationBadge">2</span></a></li>
-                           <li><a href="#"><i class="fa fa-envelope-o"></i><span class="badge">3</span></a></li>
+                           <li ><a href="#"  id="notificationIcon" ><i class="fa fa-bell-o"></i><span class="badge" id="notificationBadge"></span></a></li>
+                           <li><a href="#"><i class="fa fa-envelope-o"></i><span class="badge" >3</span></a></li>
                         </ul>
                         <ul class="user_profile_dd">
                            <li>
@@ -308,6 +309,7 @@
 
 
                            </form>
+
                            <!-- Afficher la notification si l'attribut "notification" est présent -->
                            <div th:if="${notification }">
                               <div class="notification-box">
@@ -315,10 +317,8 @@
                                  <button class="close-notification" onclick="closeNotification()">Fermer</button>
                               </div>
                            </div>
-
-               </div>
-
-
+                        </div>
+                   </div>
                   </section>
                </div>
 
@@ -546,6 +546,153 @@
    });
 </script>
 !-->
+<!-- Reste de votre code HTML -->
+
+<!-- JavaScript pour gérer la notification après l'envoi du formulaire -->
+
+<!--
+<script>
+   document.addEventListener("DOMContentLoaded", function () {
+      const submitButton = document.getElementById("submit");
+      const notificationBadge = document.getElementById("notificationBadge");
+
+      submitButton.addEventListener("click", function () {
+         // Ici, vous pouvez ajouter toute la logique pour soumettre le formulaire et enregistrer la demande
+         // ...
+
+         // Une fois que le formulaire est soumis avec succès, incrémentez le compteur et affichez la notification
+         incrementNotificationCount();
+      });
+
+      function incrementNotificationCount() {
+         const notificationBox = document.querySelector(".notification-box");
+         const notificationCount = parseInt(notificationBadge.textContent) || 0;
+         notificationBadge.textContent = notificationCount + 1;
+         notificationBox.style.display = "block";
+      }
+
+      function closeNotification() {
+         const notificationBox = document.querySelector(".notification-box");
+         notificationBox.style.display = "none";
+      }
+   });
+
+</script>
+!-->
+<!--
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+const submitButton = document.getElementById("submit");
+const notificationBadge = document.getElementById("notificationBadge");
+
+submitButton.addEventListener("click", function () {
+// Ici, vous pouvez ajouter toute la logique pour soumettre le formulaire et enregistrer la demande
+// ...
+
+// Une fois que le formulaire est soumis avec succès, incrémentez le compteur et affichez la notification
+incrementNotificationCount();
+closeNotification(); // Ajoutez cette ligne pour fermer la notification après un certain temps
+});
+
+function incrementNotificationCount() {
+const notificationBox = document.querySelector(".notification-box");
+const notificationCount = parseInt(notificationBadge.textContent) || 0;
+notificationBadge.textContent = notificationCount + 1;
+notificationBox.style.display = "block";
+}
+
+function closeNotification() {
+const notificationBox = document.querySelector(".notification-box");
+setTimeout(function () {
+notificationBox.style.display = "none";
+}, 60000); // Ferme la notification après 3 secondes (ajustez cette valeur selon vos besoins)
+}
+});
+</script>
+!-->
+
+<!-- ... (autres parties de votre code HTML) ... -->
+
+<!-- JavaScript pour gérer la notification après l'envoi du formulaire -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
 <script>
    document.addEventListener("DOMContentLoaded", function () {
       const notificationIcon = document.getElementById("notificationIcon");
@@ -571,6 +718,64 @@
       // Ici, vous devez appeler cette fonction après avoir enregistré la demande avec succès
       incrementNotificationCount();
    });
+
+   function closeNotification() {
+      const notificationBox = document.querySelector(".notification-box");
+      notificationBox.style.display = "none";
+   }
+</script>
+!-->
+<!--
+<script>
+   document.addEventListener("DOMContentLoaded", function () {
+      const submitButton = document.getElementById("submit");
+
+      submitButton.addEventListener("click", function () {
+         alert("Votre demande a bien été enregistrée.");
+      });
+   });
+</script>
+!-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+   document.addEventListener("DOMContentLoaded", function () {
+      const notificationIcon = document.getElementById("notificationIcon");
+      const notificationBadge = document.getElementById("notificationBadge");
+
+      let notificationCount = 0;
+
+      notificationIcon.addEventListener("click", function () {
+         if (notificationCount > 0) {
+            alert("Votre demande a bien été enregistrée.");
+            notificationCount = 0;
+            notificationBadge.textContent = notificationCount;
+         }
+      });
+
+      // Vous pouvez appeler cette fonction chaque fois que vous enregistrez une demande
+      function incrementNotificationCount() {
+         notificationCount++;
+         notificationBadge.textContent = notificationCount;
+      }
+
+      // Appel de la fonction pour incrémenter le compteur lorsqu'une demande est enregistrée
+      // Ici, vous devez appeler cette fonction après avoir enregistré la demande avec succès
+      incrementNotificationCount();
+   });
+
    function closeNotification() {
       const notificationBox = document.querySelector(".notification-box");
       notificationBox.style.display = "none";
@@ -578,5 +783,9 @@
 </script>
 
 
+
+
+
 </body>
 </html>
+

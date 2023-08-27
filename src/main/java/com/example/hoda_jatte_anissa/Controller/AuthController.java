@@ -50,7 +50,15 @@ public class AuthController {
 
         return "DemandeStage";
     }*/
+ @GetMapping("/dashboard_2")
+    public String dash(){
+        return "dashboard_2";
+    }
 
+    @GetMapping("/dashboard")
+    public String dashboard(){
+        return "dashboard";
+    }
 
 
 
